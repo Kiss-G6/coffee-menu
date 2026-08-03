@@ -1,0 +1,136 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+body {
+  background-color: #f7f3ee;
+  color: #2c241f;
+  margin: 0 auto;
+  padding-bottom: 80px;
+}
+header {
+  background: #3c2c21;
+  color: #fff;
+  padding: 20px 16px;
+}
+header h1 {
+  font-size: 22px;
+}
+.search-box {
+  margin-top:12px;
+}
+.search-box input{
+  width:100%;
+  padding:10px 14px;
+  border-radius:99px;
+  border:none;
+  font-size:16px;
+}
+.category-wrap{
+  display:flex;
+  gap:10px;
+  padding:16px;
+  overflow-x:auto;
+}
+.category-item{
+  white-space:nowrap;
+  padding:7px 16px;
+  background:#fff;
+  border-radius:99px;
+  border:1px solid #ddd;
+}
+.category-item.active{
+  background:#743912;
+  color:#fff;
+  border-color:#3c2c21;
+}
+.coffee-wrap {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  padding:16px;
+}
+.coffee-card{
+  background:#fff;
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 2px 8px #00000012;
+}
+.coffee-card img {
+  width: 100%;
+  /* 锁定 宽:高 = 4 : 3 */
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+.card-flavor {
+  font-size: 14px;
+  color: #d68cacdf;
+  margin-top:4px;
+  line-height:1.4;
+}
+.card-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 3px;
+    color:#98a915;
+}
+.card-body {
+  padding:12px;
+}
+.popup-mask{
+  position:fixed;
+  inset:0;
+  background:#00000077;
+  display:none;
+  padding:20px;
+  overflow-y:auto;
+}
+.popup{
+  background:#fff;
+  border-radius:16px;
+  max-width:640px;
+  margin:0 auto;
+  overflow:hidden;
+}
+.popup img {
+  width:100%;
+  aspect-ratio:4/3;
+  object-fit:cover;
+  border-radius:12px;
+}
+.pop-content{
+  padding:18px;
+}
+.pop-content h2{
+    margin-bottom:8px;
+    color:#084770;
+}
+.pop-section{
+  margin:14px 0;
+}
+.pop-section h4{
+  color:#cdafdf;
+  margin-bottom:6px;
+}.btn-group{
+    display: flex;
+    gap:12px;
+    margin-top:24px;
+}
+.btn-group button{
+    flex:1;
+    padding:16px 0;
+    border-radius:14px;
+    border:none;
+    font-size:17px;
+}
+.order-btn{
+    background-color: #f3da86;
+    color:#fff;
+}
+.close-btn{
+    background-color: #dbe681;
+    color:#fff;
+}
