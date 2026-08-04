@@ -103,7 +103,7 @@ header h1 {
 }
 .pop-content h2{
     margin-bottom:8px;
-    color:#084770;
+    color:#f3da86;
 }
 .pop-section{
   margin:14px 0;
@@ -131,35 +131,33 @@ header h1 {
     background-color: #dbe681;
     color:#fff;
 }
-/* 首页双分类选择 【最终稳定版】永久左右并排 */
-.home-select{
-  display: flex;
+.home-card-wrap{
+  display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(0,1fr);
   gap:16px;
   padding:16px;
-  width: 100%;
-  flex-wrap: nowrap !important; /* 强制禁止换行！核心代码 */
+  width:100%;
 }
-.select-card{
+.home-entry-card{
   border-radius:14px;
   overflow:hidden;
-  background:#fff;
+  background:#ffffff;
   cursor:pointer;
-  flex: 1; /* 两张卡片自动平分宽度 */
 }
-.select-card img{
+.entry-img-box{
   width:100%;
-  aspect-ratio:1 / 1; /* 图片正方形1:1 */
+  aspect-ratio:1/1;
   object-fit:cover;
-  display:block;
+  /* 这里后续填入背景图片，或者你改成img标签 */
 }
-.select-card h2{
-  text-align:center;
+.entry-text{
   padding:12px 0;
-  color:#556B2F;
-  font-size:18px;
+  text-align:center;
 }
-.hidden{
-  display:none !important;
+.entry-text h3{
+  color:#556B2F; /*橄榄绿 */
+  font-size:18px;
+  margin:0;
 }
 .entry-img-box{
   width:100%;
@@ -297,4 +295,14 @@ header h1 {
 }
 .coffee-card .card-text p {
     color:#8d6c63 !important; /*水粉色 风味简介*/
+}/* 给两个卡片分别加背景 */
+.home-entry-card[data-target="drink"] .entry-img-box{
+  background-image: url("./images/drink-cover.jpg");
+  background-size:cover;
+  background-position:center;
+}
+.home-entry-card[data-target="food"] .entry-img-box{
+  background-image: url("./images/food-cover.jpg");
+  background-size:cover;
+  background-position:center;
 }
