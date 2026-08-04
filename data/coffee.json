@@ -13,7 +13,7 @@
   {
     "id": 2,
     "name": "小黄油拿铁",
-    "category": "特调咖啡",
+    "category": "特调",
     "cover": "./images/butter-latte.jpg",
     "difficulty": 2,
     "flavor": "喜欢爆米花味的家人有福了",
@@ -24,7 +24,7 @@
   {
     "id": 3,
     "name": "桂花拿铁",
-    "category": "特调咖啡",
+    "category": "特调",
     "cover": "./images/osmanthus-latte.jpg",
     "difficulty": 4,
     "flavor": "咖啡师本人爱喝不爱闻的一款",
@@ -35,7 +35,7 @@
   {
     "id": 4,
     "name": "米乳拿铁",
-    "category": "特调咖啡",
+    "category": "特调",
     "cover": "./images/rice-latte.jpg",
     "difficulty": 3,
     "flavor": "马上有米",
