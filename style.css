@@ -34,6 +34,10 @@ header h1 {
   padding:16px;
   overflow-x:auto;
 }
+/* 新增：饮品分类隐藏横向滚动条，与美食保持统一 */
+.category-wrap::-webkit-scrollbar {
+  display:none;
+}
 .category-item{
   white-space:nowrap;
   padding:7px 16px;
@@ -80,10 +84,10 @@ header h1 {
   justify-content:center;
   align-items:center;
 }
-.popup-mask[style*="display:block"],
-.food-popup-mask[style*="display:block"]{
+/* =========【唯一改动：适配JS show类，移除旧的style匹配】========= */
+.popup-mask.show,
+.food-popup-mask.show {
   display:flex;
-
 }
 .popup{
   background:#fff;
@@ -169,7 +173,7 @@ header h1 {
   text-align:center; /* 首页「我想喝点/我要吃点」文字居中 */
 }
 .entry-text h3{
-  color:#fcd3d5;
+  color:#fea8cd;
   font-size:18px;
 }
 
