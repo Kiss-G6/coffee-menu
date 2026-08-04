@@ -1,4 +1,12 @@
 document.addEventListener('DOMContentLoaded', async function(){
+  // ========== 预加载全部商品数据（首页全局搜索依赖） ==========
+  async function preloadAllData(){
+    const coffeeRes = await fetch('./data/coffee.json');
+    originCoffeeList = await coffeeRes.json();
+    const foodRes = await fetch('./data/food.json');
+    originFoodList = await foodRes.json();
+  }
+
   // ========== 页面容器 ==========
   const homePage = document.querySelector('.home-page');
   const drinkPage = document.querySelector('.drink-page');
@@ -33,6 +41,93 @@ document.addEventListener('DOMContentLoaded', async function(){
   const foodPopupMask = document.querySelector('.food-popup-mask');
   const foodCategoryWrap = document.querySelector('.food-category-wrap');
 
+  // 执行预加载
+  preloadAllData();
+
+  // ========== 首页全局搜索功能 ==========
+  const homeSearchInput = document.querySelector("#search");
+  let globalSearchMask = null;
+
+  function createGlobalSearchMask(){
+    if(globalSearchMask) return;
+    globalSearchMask = document.createElement('div');
+    globalSearchMask.className = "popup-mask";
+    document.body.appendChild(globalSearchMask);
+    globalSearchMask.style.display = "none";
+    globalSearchMask.onclick = function(e){
+      if(e.target === globalSearchMask){
+        globalSearchMask.classList.remove('show');
+      }
+    }
+  }
+  createGlobalSearchMask();
+
+  function globalSearch(keyword){
+    if(!keyword.trim()){
+      globalSearchMask.classList.remove('show');
+      return;
+    }
+    const kw = keyword.toLowerCase();
+    let allGoods = [
+      ...originCoffeeList.map(item=>({...item, type:"饮品"})),
+      ...originFoodList.map(item=>({...item, type:"美食"}))
+    ];
+    const result = allGoods.filter(item=>
+      item.name.toLowerCase().includes(kw) || item.flavor.toLowerCase().includes(kw)
+    );
+
+    if(result.length === 0){
+      globalSearchMask.innerHTML = `
+      <div class="popup" style="padding:24px;text-align:center">
+        <h3>未找到匹配商品</h3>
+        <p style="margin:16px 0;color:#888;">尝试其他关键词</p>
+        <button class="close-btn">关闭</button>
+      </div>`;
+    }else{
+      let html = `<div class="popup" style="max-height:80vh;overflow-y:auto;padding:16px">
+      <h3>🔍 搜索结果（共${result.length}件）</h3><br>`;
+      result.forEach(item=>{
+        const hasSelect = selectedList.some(s=>s.name === item.name);
+        html += `
+        <div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #eee;cursor:pointer" data-name="${item.name}" data-type="${item.type}">
+          <img src="${item.cover}" style="width:80px;aspect-ratio:4/3;object-fit:cover;border-radius:8px;">
+          <div>
+            <div style="font-weight:bold;">【${item.type}】${item.name}</div>
+            <div style="font-size:13px;color:#666;">${item.flavor}</div>
+            ${hasSelect ? '<span style="color:green">✅ 已加入清单</span>' : ''}
+          </div>
+        </div>`;
+      })
+      html += `<br><button class="close-btn">关闭</button></div>`;
+      globalSearchMask.innerHTML = html;
+
+      globalSearchMask.querySelectorAll('[data-name]').forEach(dom=>{
+        dom.onclick = ()=>{
+          const name = dom.dataset.name;
+          const type = dom.dataset.type;
+          let targetItem;
+          if(type === "饮品"){
+            targetItem = originCoffeeList.find(i=>i.name === name);
+            globalSearchMask.classList.remove('show');
+            openDrinkPopup(targetItem);
+          }else{
+            targetItem = originFoodList.find(i=>i.name === name);
+            globalSearchMask.classList.remove('show');
+            openFoodPopup(targetItem);
+          }
+        }
+      })
+    }
+    globalSearchMask.querySelector('.close-btn').onclick = ()=>{
+      globalSearchMask.classList.remove('show');
+    }
+    globalSearchMask.classList.add('show');
+  }
+
+  homeSearchInput.oninput = (e)=>{
+    globalSearch(e.target.value);
+  }
+
 
   // ===================== 首页跳转逻辑 =====================
   document.querySelectorAll('.home-entry-card').forEach(card=>{
@@ -63,8 +158,6 @@ document.addEventListener('DOMContentLoaded', async function(){
 
   // ===================== 饮品模块 =====================
   async function loadCoffeeData() {
-    const res = await fetch('./data/coffee.json');
-    originCoffeeList = await res.json();
     coffeeList = [...originCoffeeList];
     renderCoffeeCategory();
     renderCoffeeList();
@@ -94,7 +187,8 @@ document.addEventListener('DOMContentLoaded', async function(){
     categoryWrap.innerHTML = "";
     coffeeCategoryList.forEach(cat=>{
       const btn = document.createElement("button");
-      btn.className = currentCoffeeCategory === cat ? "cat-btn active" : "cat-btn";
+      // 修复：class 修改为 category-item
+      btn.className = currentCoffeeCategory === cat ? "category-item active" : "category-item";
       btn.innerText = cat;
       btn.onclick = ()=>{
         currentCoffeeCategory = cat;
@@ -116,7 +210,6 @@ document.addEventListener('DOMContentLoaded', async function(){
     arr.forEach(item=>{
       const card = document.createElement('div');
       card.className = "coffee-card";
-      // 判断全局清单内是否存在该商品
       if(selectedList.some(s=>s.name === item.name)) card.classList.add("selected");
       card.innerHTML = `
         <img src="${item.cover}">
@@ -165,10 +258,8 @@ document.addEventListener('DOMContentLoaded', async function(){
     `;
     popupMask.querySelector('.add-item-btn').onclick = ()=>{
       if(isSelected){
-        // 删除
         selectedList = selectedList.filter(s=>s.name !== item.name);
       }else{
-        // 添加，标记品类
         selectedList.push({...item, type:"饮品"});
       }
       popupMask.classList.remove('show');
@@ -186,8 +277,6 @@ document.addEventListener('DOMContentLoaded', async function(){
 
   // ===================== 美食模块 =====================
   async function loadFoodData() {
-    const res = await fetch('./data/food.json');
-    originFoodList = await res.json();
     foodList = [...originFoodList];
     renderFoodCategory();
     renderFoodList();
@@ -198,7 +287,8 @@ document.addEventListener('DOMContentLoaded', async function(){
     foodCategoryWrap.innerHTML = "";
     foodCategoryList.forEach(cat=>{
       const btn = document.createElement("button");
-      btn.className = currentFoodCategory === cat ? "cat-btn active" : "cat-btn";
+      // 修复：class 修改为 category-item
+      btn.className = currentFoodCategory === cat ? "category-item active" : "category-item";
       btn.innerText = cat;
       btn.onclick = ()=>{
         currentFoodCategory = cat;
