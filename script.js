@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', async function(){
   }
 
   function openDrinkPopup(item){
-    popupMask.style.display = "block";
+    popupMask.classList.add('show');
     const selectedItem = selectedList.find(s=>s.name === item.name);
     const isSelected = !!selectedItem;
     const btnText = isSelected ? "还是不要了" : "我要我要";
@@ -171,11 +171,11 @@ document.addEventListener('DOMContentLoaded', async function(){
         // 添加，标记品类
         selectedList.push({...item, type:"饮品"});
       }
-      popupMask.style.display = "none";
+      popupMask.classList.remove('show');
       renderCoffeeList();
     }
     popupMask.querySelector('.close-btn').onclick = ()=>{
-      popupMask.style.display = "none";
+      popupMask.classList.remove('show');
     }
   }
 
@@ -253,7 +253,7 @@ document.addEventListener('DOMContentLoaded', async function(){
   }
 
   function openFoodPopup(item){
-    foodPopupMask.style.display = "block";
+    foodPopupMask.classList.add('show');
     const selectedItem = selectedList.find(s=>s.name === item.name);
     const isSelected = !!selectedItem;
     const btnText = isSelected ? "还是不要了" : "我要我要";
@@ -291,11 +291,11 @@ document.addEventListener('DOMContentLoaded', async function(){
       }else{
         selectedList.push({...item, type:"美食"});
       }
-      foodPopupMask.style.display = "none";
+      foodPopupMask.classList.remove('show');
       renderFoodList();
     }
     foodPopupMask.querySelector('.close-btn').onclick = ()=>{
-      foodPopupMask.style.display = "none";
+      foodPopupMask.classList.remove('show');
     }
   }
 
