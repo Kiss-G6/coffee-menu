@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "name": "热拿铁",
+    "category": "意式",
+    "cover": "./images/hot-latte.jpg",
+    "difficulty": 4,
+    "flavor": "奶香浓郁，可DIY拉花",
+    "material": "咖啡豆：中深烘；浓缩36ml；牛奶200ml",
+    "steps": "1.单杯咖啡豆，研磨度10\n2.180-200ml牛奶打成奶泡\n3.融合拉花",
+    "note": "预热1档，水温1档，奶泡打完需摇晃排气"
+  },
+  {
+    "id": 2,
+    "name": "小黄油拿铁",
+    "category": "特调",
+    "cover": "./images/butter-latte.jpg",
+    "difficulty": 2,
+    "flavor": "喜欢爆米花味的家人有福了",
+    "material": "小黄油牛乳70ml；牛奶150-300ml；浓缩液36ml",
+    "steps": "1.单杯咖啡豆\n2.依次倒入牛乳、牛奶、咖啡液",
+    "note": "预热1档，水温1档、冰块按需自取"
+  },
+  {
+    "id": 3,
+    "name": "桂花拿铁",
+    "category": "特调",
+    "cover": "./images/osmanthus-latte.jpg",
+    "difficulty": 4,
+    "flavor": "咖啡师本人爱喝不爱闻的一款",
+    "material": "浓缩咖啡36ml；桂花酱30g；牛奶220ml",
+    "steps": "1.干桂花铺底打磨咖啡粉\n2.桂花酱挂壁\n3.倒入220ml牛奶",
+    "note": "自带蜂蜜，微甜可加水20ml，减少相应奶量"
+  },
+  {
+    "id": 4,
+    "name": "米乳拿铁",
+    "category": "特调",
+    "cover": "./images/rice-latte.jpg",
+    "difficulty": 3,
+    "flavor": "马上有米",
+    "material": "浓缩咖啡36ml；米乳牛乳50ml；牛奶220ml",
+    "steps": "1.米乳牛乳打底\n2.倒入牛奶\n3.淋上咖啡液",
+    "note": "米乳味较浓，本人感觉有浓烈的坚果味？"
+  }
+]
