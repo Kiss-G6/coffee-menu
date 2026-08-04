@@ -5,14 +5,14 @@
   font-family: system-ui, -apple-system, sans-serif;
 }
 body {
-  background-color: #f7f3ee;
+  background-color: #f9f4ea;
   color: #2c241f;
   margin: 0 auto;
   padding-bottom: 80px;
 }
 header {
-  background: #3c2c21;
-  color: #fff;
+  background: #cfe4dd;
+  color: #8d6c63;
   padding: 20px 16px;
 }
 header h1 {
@@ -42,7 +42,7 @@ header h1 {
   border:1px solid #ddd;
 }
 .category-item.active{
-  background:#743912;
+  background:#fcd3d5;
   color:#fff;
   border-color:#3c2c21;
 }
@@ -65,28 +65,25 @@ header h1 {
   object-fit: cover;
   display: block;
 }
-.card-flavor {
-  font-size: 14px;
-  color: #d68cacdf;
-  margin-top:4px;
-  line-height:1.4;
-}
-.card-name {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 3px;
-    color:#98a915;
-}
 .card-body {
   padding:12px;
+  text-align: center; /* 饮品卡片文字居中 */
 }
-.popup-mask{
-  position:fixed;
+.popup-mask, .food-popup-mask {
+  position: fixed;
   inset:0;
-  background:#00000077;
+  background:#f7f7ce;
   display:none;
+  z-index:999;
   padding:20px;
   overflow-y:auto;
+  justify-content:center;
+  align-items:center;
+}
+.popup-mask[style*="display:block"],
+.food-popup-mask[style*="display:block"]{
+  display:flex;
+
 }
 .popup{
   background:#fff;
@@ -133,4 +130,157 @@ header h1 {
 .close-btn{
     background-color: #dbe681;
     color:#fff;
+}
+/* ===== 首页两大入口卡片样式 ===== */
+.home-page{
+  min-height:100vh;
+}
+.home-card-wrap{
+  padding:20px 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap:16px;
+}
+.home-entry-card{
+  background:#fff;
+  border-radius:12px;
+  overflow:hidden;
+  cursor:pointer;
+}
+.entry-img-box{
+  width:100%;
+  aspect-ratio:4/3; /* 和商品卡片保持一致4:3比例 */
+  background:#e9e3dd;
+}
+.entry-text{
+  padding:12px;
+  text-align:center; /* 首页「我想喝点/我要吃点」文字居中 */
+}
+.entry-text h3{
+  color:#fcd3d5;
+  font-size:18px;
+}
+
+/* ===== 页面切换基础样式 ===== */
+.back-btn{
+  color:#f9f4ea;
+  margin-bottom:8px;
+  cursor:pointer;
+  width:fit-content;
+  font-size:15px;
+  opacity:0.9;
+}
+.page-wrap{
+  display:none;
+}
+
+/* ===== 美食列表容器（和饮品布局完全统一） ===== */
+.food-wrap {
+  padding:0 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap:16px;
+  margin-top:12px;
+  padding-bottom:90px !important;
+
+}
+/* 给美食卡片统一居中规则 */
+.food-card{
+  background:#fff;
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 2px 8px #00000012;
+}
+.food-card img{
+  width:100%;
+  aspect-ratio:4/3;
+  object-fit:cover;
+  display:block;
+}
+.food-card .card-body{
+  padding:12px;
+  text-align:center; /* 美食卡片文字居中 */
+}
+
+.food-category-wrap {
+  display: flex;
+  gap: 10px;
+  padding:14px 16px;
+  overflow-x: auto;
+}
+.food-category-wrap::-webkit-scrollbar {
+  display:none;
+}
+/* 底部结算栏 */
+.bottom-submit-bar{
+  position: fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:#fff;
+  padding:12px 16px;
+  box-shadow: 0 -2px 10px #00000012;
+  display:flex;
+  gap:12px;
+  align-items:center;
+  z-index:99;
+}
+.submit-btn{
+  flex:1;
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  background:#f7e2a8;
+  color:#7d6d5a;;
+  font-size:16px;
+}
+.clear-btn{
+  padding:12px 16px;
+  border-radius:10px;
+  border:1px solid #999;
+  background:#fff;
+}
+/* 已选中卡片标记 */
+.coffee-card.selected, .food-card.selected{
+  outline:3px solid #d8d511;
+}
+/* 弹窗操作按钮 */
+.select-item-btn{
+  width:100%;
+  padding:10px;
+  margin:4px 0;
+  border:none;
+  border-radius:8px;
+  background:#ffdaed;
+  color:#ff82a2;
+  font-size:15px;
+}
+.select-item-btn.cancel{
+  background:#c0e0f2;
+}
+/* 底部预留空间，防止内容被卡片遮挡 */
+.coffee-wrap, .food-wrap{
+  padding-bottom:90px !important;
+}.coffee-card {
+  text-align: center !important;
+}.coffee-card, .food-card {
+  text-align: center !important;
+}.pop-content h2{
+    margin-bottom:8px;
+    color:#00a6c7; /*橄榄绿：大标题饮品名称 */
+}
+.pop-section{
+  margin:14px 0;
+}
+.pop-section h4{
+  color:#ff559f; /*蓝灰色：小标题【风味描述/原料清单】 */
+  margin-bottom:6px;
+}
+.pop-section p {
+  color: #9ce6a6;; /*水粉色：所有正文文字 */
+}.coffee-card .card-text h3 {
+    color:#7ca18b !important; /*橄榄绿 饮品名称*/
+}
+.coffee-card .card-text p {
+    color:#8d6c63 !important; /*水粉色 风味简介*/
 }
