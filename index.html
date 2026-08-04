@@ -7,10 +7,13 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- 首页：两大分类入口（静态卡片，不读取商品JSON） -->
+  <!-- 首页：选择 饮品/美食 -->
   <div class="home-page">
     <header>
-      <h1>☕ 玛咖巴咖</h1>
+      <h1>☕ 玛咖巴咖菜单</h1>
+      <div class="search-box">
+        <input id="search" placeholder="搜索名称、风味">
+      </div>
     </header>
     <div class="home-card-wrap">
       <div class="home-entry-card" data-target="drink">
@@ -28,8 +31,8 @@
     </div>
   </div>
 
-  <!-- 饮品二级页面 -->
-  <div class="drink-page page-wrap" style="display: none;">
+  <!-- 饮品页面 -->
+  <div class="page-wrap drink-page">
     <header>
       <div class="back-btn">← 返回首页</div>
       <h1>饮品菜单</h1>
@@ -39,21 +42,26 @@
     </header>
     <div class="category-wrap"></div>
     <div class="coffee-wrap"></div>
-    <div class="popup-mask" style="display: none;"></div>
   </div>
 
-  <!-- 小吃二级页面 -->
-  <div class="food-page page-wrap" style="display: none;">
+  <!-- 美食页面 -->
+  <div class="page-wrap food-page">
     <header>
       <div class="back-btn">← 返回首页</div>
       <h1>小食菜单</h1>
       <div class="search-box">
-        <input id="search-food" placeholder="搜索小食名称、风味">
+        <input id="search-food" placeholder="搜索小吃名称、风味">
       </div>
     </header>
     <div class="food-category-wrap"></div>
-    <div class="food-wrap"></div>
-    <div class="food-popup-mask" style="display: none;"></div>
+    <div class="coffee-wrap"></div>
+  </div>
+
+  <!-- 饮品弹窗遮罩 -->
+  <div class="popup-mask">
+  </div>
+  <!-- 美食弹窗遮罩 -->
+  <div class="food-popup-mask">
   </div>
 
   <script src="script.js"></script>
