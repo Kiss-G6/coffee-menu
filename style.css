@@ -131,21 +131,35 @@ header h1 {
     background-color: #dbe681;
     color:#fff;
 }
-/* ===== 首页两大入口卡片样式 ===== */
-.home-page{
-  min-height:100vh;
-}
-.home-card-wrap{
-  padding:20px 16px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+/* 首页双分类选择 【最终稳定版】永久左右并排 */
+.home-select{
+  display: flex;
   gap:16px;
+  padding:16px;
+  width: 100%;
+  flex-wrap: nowrap !important; /* 强制禁止换行！核心代码 */
 }
-.home-entry-card{
-  background:#fff;
-  border-radius:12px;
+.select-card{
+  border-radius:14px;
   overflow:hidden;
+  background:#fff;
   cursor:pointer;
+  flex: 1; /* 两张卡片自动平分宽度 */
+}
+.select-card img{
+  width:100%;
+  aspect-ratio:1 / 1; /* 图片正方形1:1 */
+  object-fit:cover;
+  display:block;
+}
+.select-card h2{
+  text-align:center;
+  padding:12px 0;
+  color:#556B2F;
+  font-size:18px;
+}
+.hidden{
+  display:none !important;
 }
 .entry-img-box{
   width:100%;
